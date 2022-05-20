@@ -11,24 +11,30 @@ class BarcodesDetector: NSObject {
     }
 
     @objc(scan:withResolver:withRejecter:)
-    func scan(imageUri: String, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
+    func scan(imageUrl: String, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
         let format = BarcodeFormat.all
         let barcodeOptions = BarcodeScannerOptions(formats: format)
 
-        let sanitizedImageUri = sanitizePath(imageUri: imageUri)
-        let fileExists = FileManager.default.fileExists(atPath: sanitizedImageUri)
+        let sanitizedimageUrl = sanitizePath(imageUrl: imageUrl)
+        let fileExists = FileManager.default.fileExists(atPath: sanitizedimageUrl)
 
         if (!fileExists) {
             reject("image_not_found", "The image has not been found", nil);
             return
         }
 
-        let url = NSURL(string: "file://" + sanitizedImageUri)
-        let data = NSData(contentsOf: url! as URL)
-        let image = UIImage(data: data! as Data)
+        guard let url = NSURL(string: "file://" + sanitizedimageUrl) else {
+            reject("malformed_url", "Malformed image URL", nil);
+            return
+        }
 
-        let visionImage = VisionImage(image: image!)
-        visionImage.orientation = image!.imageOrientation
+        guard let data = NSData(contentsOf: url as URL), let image = UIImage(data: data as Data) else {
+            reject("image_load_error", "Couldn't load the image", nil);
+            return
+        }
+
+        let visionImage = VisionImage(image: image)
+        visionImage.orientation = image.imageOrientation
 
         let barcodeScanner = BarcodeScanner.barcodeScanner(options: barcodeOptions)
 
@@ -42,8 +48,8 @@ class BarcodesDetector: NSObject {
         }
     }
 
-    func sanitizePath(imageUri: String) -> String {
-        var sanitized = String(imageUri)
+    func sanitizePath(imageUrl: String) -> String {
+        var sanitized = String(imageUrl)
 
         // Remove the `file://` prefix if it exists.
         if (sanitized.hasPrefix("file://")) {

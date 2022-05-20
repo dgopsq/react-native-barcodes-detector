@@ -21,6 +21,6 @@ export function multiply(a: number, b: number): Promise<number> {
   return BarcodesDetector.multiply(a, b);
 }
 
-export function scan(imageUri: string): Promise<number> {
-  return BarcodesDetector.scan(imageUri);
+export function scan(imageUrl: string): Promise<number> {
+  return BarcodesDetector.scan(imageUrl);
 }
