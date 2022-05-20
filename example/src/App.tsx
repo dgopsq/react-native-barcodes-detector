@@ -1,31 +1,26 @@
-import * as React from 'react';
-
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-barcodes-detector';
+import React from 'react';
+import { scan } from 'react-native-barcodes-detector';
+import { launchImageLibrary } from 'react-native-image-picker';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
   React.useEffect(() => {
-    multiply(3, 7).then(setResult);
+    const exec = async () => {
+      try {
+        const selectedImage = await launchImageLibrary({ mediaType: 'photo' });
+        const nextImageUri = selectedImage?.assets?.[0].uri || null;
+
+        if (nextImageUri !== null) {
+          console.log(nextImageUri);
+          const result = await scan(nextImageUri);
+          console.log(result);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    };
+
+    exec();
   }, []);
 
-  return (
-    <View style={styles.container}>
-      <Text>Result: {result}</Text>
-    </View>
-  );
+  return null;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-  },
-});
