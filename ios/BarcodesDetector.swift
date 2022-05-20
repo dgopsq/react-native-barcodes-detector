@@ -5,7 +5,7 @@ import Foundation
 @objc(BarcodesDetector)
 class BarcodesDetector: NSObject {
 
-    /*
+    /**
     Main function used to scan all the barcodes inside
     the given image. This uses Google MLKit under the hood.
     */
@@ -49,7 +49,7 @@ class BarcodesDetector: NSObject {
         }
     }
 
-    /*
+    /**
     Sanitize the given image path removing redundant
     characters like the `file://` prefix.
     */
@@ -64,7 +64,7 @@ class BarcodesDetector: NSObject {
         return sanitized
     }
 
-    /*
+    /**
     Transform the array of `Barcode` into an array of
     `NSMutableDictionary` which can be sent to React Native.
     */
@@ -85,7 +85,7 @@ class BarcodesDetector: NSObject {
         return result
     }
 
-    /*
+    /**
     Transform an array of `NSValue` with a `CGPoint` inside into
     an array of `NSMutableDictionary` which can be sent to React Native.
     */
