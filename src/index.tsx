@@ -10,11 +10,33 @@ export type Point = {
 };
 
 /**
+ * Enum representing a Barcode Format and
+ * its identification number.
+ */
+export enum BarcodeFormat {
+  ALL_FORMATS = 0,
+  AZTEC = 4096,
+  CODABAR = 8,
+  CODE_128 = 1,
+  CODE_39 = 2,
+  CODE_93 = 4,
+  DATA_MATRIX = 16,
+  EAN_13 = 32,
+  EAN_8 = 64,
+  ITF = 128,
+  PDF417 = 2048,
+  QR_CODE = 256,
+  UNKNOWN = -1,
+  UPC_A = 512,
+  UPC_E = 1024,
+}
+
+/**
  * Data structure describing a single Barcode
  * detected in an image.
  */
 export type Barcode = {
-  format: number;
+  format: BarcodeFormat;
   rawValue: string | null;
   displayValue: string | null;
   cornerPoints: Array<Point>;
