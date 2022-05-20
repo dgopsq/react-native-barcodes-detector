@@ -5,6 +5,10 @@ import Foundation
 @objc(BarcodesDetector)
 class BarcodesDetector: NSObject {
 
+    /*
+    Main function used to scan all the barcodes inside
+    the given image. This uses Google MLKit under the hood.
+    */
     @objc(scan:withResolver:withRejecter:)
     func scan(imageUrl: String, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
         let format = BarcodeFormat.all
@@ -45,6 +49,10 @@ class BarcodesDetector: NSObject {
         }
     }
 
+    /*
+    Sanitize the given image path removing redundant
+    characters like the `file://` prefix.
+    */
     func sanitizePath(imageUrl: String) -> String {
         var sanitized = String(imageUrl)
 
@@ -56,6 +64,10 @@ class BarcodesDetector: NSObject {
         return sanitized
     }
 
+    /*
+    Transform the array of `Barcode` into an array of
+    `NSMutableDictionary` which can be sent to React Native.
+    */
     func transformBarcodes(barcodes: [Barcode]) -> [NSMutableDictionary] {
         var result: [NSMutableDictionary] = []
 
@@ -76,6 +88,10 @@ class BarcodesDetector: NSObject {
         return result
     }
 
+    /*
+    Transform an array of `NSValue` with a `CGPoint` inside into
+    an array of `NSMutableDictionary` which can be sent to React Native.
+    */
     func transformPoints(points: [NSValue]) -> [NSMutableDictionary] {
         return points.map { rawPoint in
             let point = rawPoint.cgPointValue
