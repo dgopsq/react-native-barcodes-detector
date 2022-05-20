@@ -17,10 +17,6 @@ const BarcodesDetector = NativeModules.BarcodesDetector
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return BarcodesDetector.multiply(a, b);
-}
-
 export function scan(imageUrl: string): Promise<Array<unknown>> {
   return BarcodesDetector.scan(imageUrl);
 }
