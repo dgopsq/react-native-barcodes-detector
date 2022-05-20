@@ -1,5 +1,5 @@
 import React from 'react';
-import { scan } from 'react-native-barcodes-detector';
+import { BarcodeFormat, scan } from 'react-native-barcodes-detector';
 import { launchImageLibrary } from 'react-native-image-picker';
 
 export default function App() {
@@ -11,7 +11,7 @@ export default function App() {
 
         if (nextImageUri !== null) {
           console.log(nextImageUri);
-          const result = await scan(nextImageUri);
+          const result = await scan(nextImageUri, [BarcodeFormat.DATA_MATRIX]);
           console.log(result);
         }
       } catch (e) {

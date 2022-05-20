@@ -9,10 +9,10 @@ class BarcodesDetector: NSObject {
     Main function used to scan all the barcodes inside
     the given image. This uses Google MLKit under the hood.
     */
-    @objc(scan:withResolver:withRejecter:)
-    func scan(imageUrl: String, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
-        let format = BarcodeFormat.all
-        let barcodeOptions = BarcodeScannerOptions(formats: format)
+    @objc(scan:withFormats:withResolver:withRejecter:)
+    func scan(imageUrl: String, formats: [Int], resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
+        let chosenBarcodeFormats = BarcodeFormat(rawValue: formats.reduce(0, +))
+        let barcodeOptions = BarcodeScannerOptions(formats: chosenBarcodeFormats)
 
         let sanitizedimageUrl = sanitizePath(imageUrl: imageUrl)
         let fileExists = FileManager.default.fileExists(atPath: sanitizedimageUrl)
