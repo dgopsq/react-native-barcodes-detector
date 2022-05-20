@@ -77,10 +77,7 @@ class BarcodesDetector: NSObject {
             barcodeDict["format"] = barcode.format.rawValue
             barcodeDict["rawValue"] = barcode.rawValue
             barcodeDict["displayValue"] = barcode.displayValue
-
-            if let cornerPoints = barcode.cornerPoints {
-                barcodeDict["cornerPoints"] = transformPoints(points: cornerPoints)
-            }
+            barcodeDict["cornerPoints"] = transformPoints(points: barcode.cornerPoints ?? [])
 
             result.append(barcodeDict)
         }
