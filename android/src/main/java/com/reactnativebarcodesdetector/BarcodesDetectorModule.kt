@@ -31,9 +31,12 @@ class BarcodesDetectorModule(reactContext: ReactApplicationContext) : ReactConte
       val optionsBuilder = BarcodeScannerOptions.Builder()
 
       if (formatsArray.size > 0) {
+        val additionalFormats = 
+          if (formatsArray.size > 1) formatsArray.drop(1).toIntArray() else IntArray(0)
+
         optionsBuilder.setBarcodeFormats(
           formatsArray[0], 
-          *formatsArray.drop(1).toIntArray()
+          *additionalFormats
         )
       }
 
@@ -63,7 +66,7 @@ class BarcodesDetectorModule(reactContext: ReactApplicationContext) : ReactConte
     fun getFormats(array: ReadableArray): Array<Int> {
       val result = mutableListOf<Int>()
       
-      for (i in 0..array.size()) {
+      for (i in 0..array.size() - 1) {
         val value = array.getInt(i)
         result.add(value)
       }
