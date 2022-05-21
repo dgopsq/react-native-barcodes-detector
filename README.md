@@ -30,7 +30,7 @@ import { detectBarcodes, BarcodeFormat } from "react-native-barcodes-detector";
 // through libraries like `react-native-image-picker`.
 const imageUrl = "file://..."
 
-// The `detectBarcode` function needs the image url and
+// The `detectBarcodes` function needs the image url and
 // a list of formats to detect. Using an empty array all
 // the supported formats will be used making the detection
 // process slower 🐌.
