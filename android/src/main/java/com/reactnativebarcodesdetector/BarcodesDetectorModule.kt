@@ -26,18 +26,22 @@ class BarcodesDetectorModule(reactContext: ReactApplicationContext) : ReactConte
 
     @ReactMethod
     fun scan(imageUrl: String, formats: ReadableArray, promise: Promise) {
-      val options = BarcodeScannerOptions.Builder()
-        .setBarcodeFormats(
-          Barcode.FORMAT_QR_CODE,
-          Barcode.FORMAT_AZTEC
+      var formatsArray = getFormats(formats)
+
+      val optionsBuilder = BarcodeScannerOptions.Builder()
+
+      if (formatsArray.size > 0) {
+        optionsBuilder.setBarcodeFormats(
+          formatsArray[0], 
+          *formatsArray.drop(1).toIntArray()
         )
-        .build()
+      }
 
       try {
         val uri = Uri.parse(imageUrl)
         val image = InputImage.fromFilePath(ctx, uri)
 
-        val scanner = BarcodeScanning.getClient(options)
+        val scanner = BarcodeScanning.getClient(optionsBuilder.build())
 
         scanner.process(image)
           .addOnSuccessListener { barcodes ->
@@ -54,6 +58,17 @@ class BarcodesDetectorModule(reactContext: ReactApplicationContext) : ReactConte
       } catch (_: Throwable) {
         promise.reject("image_load_error", "Couldn't load the image")
       }
+    }
+
+    fun getFormats(array: ReadableArray): Array<Int> {
+      val result = mutableListOf<Int>()
+      
+      for (i in 0..array.size()) {
+        val value = array.getInt(i)
+        result.add(value)
+      }
+
+      return result.toTypedArray()
     }
 
     fun transformBarcodes(barcodes: List<Barcode>): WritableArray {
