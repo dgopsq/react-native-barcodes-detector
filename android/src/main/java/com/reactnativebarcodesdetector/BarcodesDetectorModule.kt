@@ -96,12 +96,26 @@ class BarcodesDetectorModule(reactContext: ReactApplicationContext) : ReactConte
       
       for (barcode in barcodes) {
         val barcodeMap = Arguments.createMap();
-        val cornerPoints = Arguments.createArray()
+
+        val cornerPoints = barcode.getCornerPoints()
+        val cornerPointsArray = Arguments.createArray()
 
         barcodeMap.putInt("format", barcode.getFormat())
         barcodeMap.putString("rawValue", barcode.getRawValue())
         barcodeMap.putString("displayValue", barcode.getDisplayValue())
-        barcodeMap.putArray("cornerPoints", cornerPoints)
+
+        if (cornerPoints != null) {
+          for (point in cornerPoints) {
+            val pointMap = Arguments.createMap();
+
+            pointMap.putInt("x", point.x)
+            pointMap.putInt("y", point.y)
+
+            cornerPointsArray.pushMap(pointMap)
+          }
+        }
+
+        barcodeMap.putArray("cornerPoints", cornerPointsArray)
 
         result.pushMap(barcodeMap)
       }
