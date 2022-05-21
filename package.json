@@ -1,7 +1,7 @@
 {
   "name": "react-native-barcodes-detector",
   "version": "0.1.0",
-  "description": "Detect barcodes in images using the Google ML Kit APIs",
+  "description": "Detect barcodes from static images in React Native using Google ML Kit.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",
@@ -57,7 +57,6 @@
     "eslint": "^7.2.0",
     "eslint-config-prettier": "^7.0.0",
     "eslint-plugin-prettier": "^3.1.3",
-    "husky": "^6.0.0",
     "jest": "^26.0.1",
     "pod-install": "^0.1.0",
     "prettier": "^2.0.5",
