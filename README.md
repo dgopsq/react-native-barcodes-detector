@@ -1,7 +1,12 @@
 ![Header](https://raw.githubusercontent.com/dgopsq/react-native-barcodes-detector/main/assets/header.jpg?token=GHSAT0AAAAAABQMUFRBM6B4EL3TLJB5CYZSYUI45HQ)
 
-Detect different barcodes in static images directly on React Native. This library uses [Google ML Kit](https://developers.google.com/ml-kit) under the hood 🤖.
+Detect different barcodes in static images directly on React Native. This library has a [TypeScript](https://www.typescriptlang.org/)-first support and uses [Google ML Kit](https://developers.google.com/ml-kit) under the hood 🤖.
 
+The **supported barcodes** are:
+- QR Code
+- Data Matrix
+- EAN13
+- [And more...](https://www.typescriptlang.org/)
 ## 🏗 Installation
 
 ```sh
@@ -37,3 +42,16 @@ detectBarcodes(imageUrl, formats)
     // of detected barcodes.
   })
 ```
+## ℹ️ More informations
+`react-native-barcodes-detector` uses [Google ML Kit](https://developers.google.com/ml-kit) under the hood, thus it has the same features and limitations.
+
+## 🙋 FAQ
+
+### Where is the detection process actually done?
+This library uses [Google ML Kit](https://developers.google.com/ml-kit) to recognize barcodes, and this process is **completely done on the physical device**.
+
+### Why I can't detect a Data Matrix code?
+For a Data Matrix to be recognized it must intersect the center of the image, as stated [here](https://developers.google.com/ml-kit/vision/barcode-scanning/android#1.-configure-the-barcode-scanner). This means that only one Data Matrix code can be recognized per image.
+
+## ⚖️ License
+React Native Barcodes Detector is under the [MIT license](https://github.com/dgopsq/react-native-barcodes-detector/blob/main/LICENSE).
