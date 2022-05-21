@@ -6,7 +6,7 @@ The **supported barcodes** are:
 - QR Code
 - Data Matrix
 - EAN13
-- [And more...](https://www.typescriptlang.org/)
+- [And more...](https://github.com/dgopsq/react-native-barcodes-detector/blob/main/src/index.tsx#L16-L32)
 ## 🏗 Installation
 
 ```sh
