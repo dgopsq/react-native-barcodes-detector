@@ -6,8 +6,10 @@ import Foundation
 class BarcodesDetector: NSObject {
 
     /**
-    Main function used to scan all the barcodes inside
-    the given image. This uses Google MLKit under the hood.
+    Main function used to scan all the barcodes inside the given image. 
+    It's possible to define a list of `BarcodeFormat` in order to 
+    reduce the detection time, since by default it detects all the 
+    supported barcodes. This uses Google MLKit under the hood.
     */
     @objc(scan:withFormats:withResolver:withRejecter:)
     func scan(imageUrl: String, formats: [Int], resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {

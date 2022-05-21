@@ -24,6 +24,13 @@ class BarcodesDetectorModule(reactContext: ReactApplicationContext) : ReactConte
       return "BarcodesDetector"
     }
 
+    /**
+     * Main function used to scan all the barcodes inside
+     * the given image. It's possible to define a list of
+     * `BarcodeFormat` in order to reduce the detection
+     * time, since by default it detects all the supported 
+     * barcodes. This uses Google MLKit under the hood.
+     */
     @ReactMethod
     fun scan(imageUrl: String, formats: ReadableArray, promise: Promise) {
       var formatsArray = getFormats(formats)
@@ -63,6 +70,11 @@ class BarcodesDetectorModule(reactContext: ReactApplicationContext) : ReactConte
       }
     }
 
+    /**
+     * Transform a `ReadableArray` reveived from React Native
+     * into an Array of Int representing the various barcodes
+     * formats to detect.
+     */
     fun getFormats(array: ReadableArray): Array<Int> {
       val result = mutableListOf<Int>()
       
@@ -74,6 +86,11 @@ class BarcodesDetectorModule(reactContext: ReactApplicationContext) : ReactConte
       return result.toTypedArray()
     }
 
+    /**
+     * Transform a `List` of `Barcode` into a `WritableArray` which
+     * can be passed to the React Native context as the result
+     * of the detection process.
+     */
     fun transformBarcodes(barcodes: List<Barcode>): WritableArray {
       val result = Arguments.createArray()
       
