@@ -11,7 +11,7 @@ export default function App() {
 
         if (nextImageUri !== null) {
           console.log(nextImageUri);
-          const result = await scan(nextImageUri, [BarcodeFormat.DATA_MATRIX]);
+          const result = await scan(nextImageUri, [BarcodeFormat.QR_CODE]);
           console.log(result);
         }
       } catch (e) {
