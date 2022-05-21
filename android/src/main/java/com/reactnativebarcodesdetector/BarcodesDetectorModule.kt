@@ -34,7 +34,7 @@ class BarcodesDetectorModule(reactContext: ReactApplicationContext) : ReactConte
     @ReactMethod
     fun detectBarcodes(imageUrl: String, formats: ReadableArray, promise: Promise) {
       var formatsArray = getFormats(formats)
-
+      val sanitizedimageUrl = sanitizePath(imageUrl)
       val optionsBuilder = BarcodeScannerOptions.Builder()
 
       if (formatsArray.size > 0) {
@@ -48,7 +48,7 @@ class BarcodesDetectorModule(reactContext: ReactApplicationContext) : ReactConte
       }
 
       try {
-        val uri = Uri.parse(imageUrl)
+        val uri = Uri.parse(sanitizedimageUrl)
         val image = InputImage.fromFilePath(ctx, uri)
 
         val scanner = BarcodeScanning.getClient(optionsBuilder.build())
@@ -68,6 +68,20 @@ class BarcodesDetectorModule(reactContext: ReactApplicationContext) : ReactConte
       } catch (_: Throwable) {
         promise.reject("image_load_error", "Couldn't load the image")
       }
+    }
+
+    /**
+     * Sanitize the given image path adding the 
+     * required `file://` protocol when needed.
+     */
+    fun sanitizePath(imageUrl: String): String {
+      var sanitized = imageUrl
+
+      if (!imageUrl.startsWith("file://")) {
+        sanitized = "file://" + sanitized
+      }
+
+      return sanitized
     }
 
     /**
