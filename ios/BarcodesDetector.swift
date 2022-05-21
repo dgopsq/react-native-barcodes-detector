@@ -11,8 +11,8 @@ class BarcodesDetector: NSObject {
     reduce the detection time, since by default it detects all the 
     supported barcodes. This uses Google MLKit under the hood.
     */
-    @objc(scan:withFormats:withResolver:withRejecter:)
-    func scan(imageUrl: String, formats: [Int], resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
+    @objc(detectBarcodes:withFormats:withResolver:withRejecter:)
+    func detectBarcodes(imageUrl: String, formats: [Int], resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
         let chosenBarcodeFormats = BarcodeFormat(rawValue: formats.reduce(0, +))
         let barcodeOptions = BarcodeScannerOptions(formats: chosenBarcodeFormats)
 

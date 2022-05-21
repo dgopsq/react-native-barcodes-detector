@@ -2,7 +2,7 @@
 
 @interface RCT_EXTERN_MODULE(BarcodesDetector, NSObject)
 
-RCT_EXTERN_METHOD(scan:(NSString)imageUrl
+RCT_EXTERN_METHOD(detectBarcodes:(NSString)imageUrl
                   withFormats:(NSArray)formats
                   withResolver:(RCTPromiseResolveBlock)resolve
                   withRejecter:(RCTPromiseRejectBlock)reject)

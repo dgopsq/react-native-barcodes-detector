@@ -66,9 +66,9 @@ const BarcodesDetector = NativeModules.BarcodesDetector
  * @param formats An array of `BarcodeFormat` selected to detect.
  * @returns A promise resolving to a list of `Barcode` detected in the image.
  */
-export function scan(
+export function detectBarcodes(
   imageUrl: string,
   formats: Array<BarcodeFormat>
 ): Promise<Array<Barcode>> {
-  return BarcodesDetector.scan(imageUrl, formats);
+  return BarcodesDetector.detectBarcodes(imageUrl, formats);
 }

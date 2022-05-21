@@ -32,7 +32,7 @@ class BarcodesDetectorModule(reactContext: ReactApplicationContext) : ReactConte
      * barcodes. This uses Google MLKit under the hood.
      */
     @ReactMethod
-    fun scan(imageUrl: String, formats: ReadableArray, promise: Promise) {
+    fun detectBarcodes(imageUrl: String, formats: ReadableArray, promise: Promise) {
       var formatsArray = getFormats(formats)
 
       val optionsBuilder = BarcodeScannerOptions.Builder()
