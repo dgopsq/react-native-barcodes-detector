@@ -63,7 +63,7 @@ const BarcodesDetector = NativeModules.BarcodesDetector
  * Detect all the barcodes in the given image.
  *
  * @param imageUrl The url to the local image used in the detection process. This could be either with the `file://` protocol or without it.
- * @param formats An array of `BarcodeFormat` selected to detect.
+ * @param formats An array of `BarcodeFormat` to detect. Passing an empty array is the same as passing `Barcode.ALL_FORMATS`.
  * @returns A promise resolving to a list of `Barcode` detected in the image.
  */
 export function detectBarcodes(
