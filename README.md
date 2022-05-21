@@ -1,4 +1,4 @@
-![Header](https://raw.githubusercontent.com/dgopsq/react-native-barcodes-detector/main/assets/header.jpg?token=GHSAT0AAAAAABQMUFRBM6B4EL3TLJB5CYZSYUI45HQ)
+![Header](https://github.com/dgopsq/react-native-barcodes-detector/blob/main/assets/header.jpg)
 
 Detect different barcodes in static images directly on React Native. This library has a [TypeScript](https://www.typescriptlang.org/)-first support and uses [Google ML Kit](https://developers.google.com/ml-kit) under the hood 🤖.
 
@@ -42,8 +42,6 @@ detectBarcodes(imageUrl, formats)
     // of detected barcodes.
   })
 ```
-## ℹ️ More informations
-`react-native-barcodes-detector` uses [Google ML Kit](https://developers.google.com/ml-kit) under the hood, thus it has the same features and limitations.
 
 ## 🙋 FAQ
 
