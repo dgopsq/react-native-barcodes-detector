@@ -11,7 +11,6 @@ import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
-import java.io.IOException
 import android.net.Uri
 
 class BarcodesDetectorModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
@@ -22,7 +21,7 @@ class BarcodesDetectorModule(reactContext: ReactApplicationContext) : ReactConte
     }
 
     override fun getName(): String {
-        return "BarcodesDetector"
+      return "BarcodesDetector"
     }
 
     @ReactMethod
@@ -35,23 +34,25 @@ class BarcodesDetectorModule(reactContext: ReactApplicationContext) : ReactConte
         .build()
 
       try {
-          val uri = Uri.parse(imageUrl)
-          val image = InputImage.fromFilePath(ctx, uri)
+        val uri = Uri.parse(imageUrl)
+        val image = InputImage.fromFilePath(ctx, uri)
 
-          val scanner = BarcodeScanning.getClient()
+        val scanner = BarcodeScanning.getClient(options)
 
-          val result = scanner.process(image)
-            .addOnSuccessListener { barcodes ->
-              val transformedBarcodes = transformBarcodes(barcodes)
+        scanner.process(image)
+          .addOnSuccessListener { barcodes ->
+            val transformedBarcodes = transformBarcodes(barcodes)
 
-              promise.resolve(transformedBarcodes)
-            }
-            .addOnFailureListener {
-                // Task failed with an exception
-                // ...
-            }
-      } catch (e: IOException) {
-          e.printStackTrace()
+            promise.resolve(transformedBarcodes)
+          }
+          .addOnFailureListener {
+            promise.reject("detection_error", "Error while detecting the barcodes")
+          }
+          .addOnCompleteListener {
+            scanner.close()
+          }
+      } catch (_: Throwable) {
+        promise.reject("image_load_error", "Couldn't load the image")
       }
     }
 
