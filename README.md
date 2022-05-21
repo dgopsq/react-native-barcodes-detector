@@ -10,11 +10,11 @@ The **supported barcodes** are:
 ## 🏗 Installation
 
 ```sh
-# NPM
+# Install
 npm install react-native-barcodes-detector
 
-# Yarn
-yarn add react-native-barcodes-detector
+# Link
+cd ios && pod install
 ```
 
 ## ⚡️ Usage
