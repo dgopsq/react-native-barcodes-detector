@@ -6,6 +6,7 @@ on:
       - main
       - ios-build-ci
 
+jobs:
   build:
     name: Build iOS
     runs-on: macOS-latest
