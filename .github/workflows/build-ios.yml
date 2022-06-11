@@ -50,4 +50,4 @@ jobs:
       - name: Install Pods
         run: bundle exec pod check || bundle exec pod install
       - name: Build App
-        run: yarn ios --cwd ..
+        run: yarn ios
