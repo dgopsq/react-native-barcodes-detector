@@ -10,6 +10,10 @@ jobs:
   call-code-check:
     uses: ./.github/workflows/code-check.yml
 
-  call-build-ios:
+  # call-build-ios:
+  #   needs: call-code-check
+  #   uses: ./.github/workflows/build-ios.yml
+
+  call-build-android:
     needs: call-code-check
-    uses: ./.github/workflows/build-ios.yml
+    uses: ./.github/workflows/build-android.yml
