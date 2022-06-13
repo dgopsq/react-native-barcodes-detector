@@ -8,6 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Setup JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
       - name: Retrieve Yarn cache directory
         id: yarn-cache-dir
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -34,4 +38,4 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-caches-
       - name: Build example app
-        run: cd example/android && ./gradlew assembleDebug --build-cache && cd ../..
+        run: cd example/android && ./gradlew assembleDebug && cd ../..
