@@ -12,6 +12,10 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
+          cache: 'gradle'
+      - uses: nttld/setup-ndk@v1
+        with:
+          ndk-version: r21e
       - name: Retrieve Yarn cache directory
         id: yarn-cache-dir
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -25,14 +29,5 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: Install node_modules
         run: yarn install --cwd ./example/
-      - name: Restore Gradle cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
       - name: Build App
         run: yarn example android
