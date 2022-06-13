@@ -5,13 +5,17 @@ on: workflow_call
 jobs:
   build:
     name: Build Android
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Setup JDK
         uses: actions/setup-java@v1
         with:
+          distribution: 'zulu'
           java-version: '11.0.10'
+      - uses: nttld/setup-ndk@v1
+        with:
+          ndk-version: r23b
       - name: Retrieve Yarn cache directory
         id: yarn-cache-dir
         run: echo "::set-output name=dir::$(yarn cache dir)"
