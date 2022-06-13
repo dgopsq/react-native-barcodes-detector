@@ -31,4 +31,4 @@ jobs:
       - name: Install node_modules
         run: yarn install && yarn install --cwd ./example/
       - name: Build App
-        run: cd example/android && ./gradlew assembleDebug --build-cache && cd ../..
+        run: cd example/android && ./gradlew assembleDebug --build-cache --stacktrace
