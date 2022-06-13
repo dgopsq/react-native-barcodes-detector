@@ -1,9 +1,9 @@
 name: Lint and compile
 
-on: push
+on: workflow_call
 
 jobs:
-  build:
+  lint_and_compile:
     name: Lint and compile
     runs-on: macOS-latest
     steps:
@@ -20,7 +20,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Install node_modules
-        run: yarn install
+        run: yarn install && yarn install --cwd ./example/
       - name: Lint
         run: yarn lint
       - name: Compile TypeScript

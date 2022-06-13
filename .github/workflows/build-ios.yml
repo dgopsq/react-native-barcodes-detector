@@ -7,7 +7,10 @@ on:
       - ios-build-ci
 
 jobs:
-  build:
+  lint_and_compile:
+    uses: dgopsq/react-native-barcodes-detector/.github/workflows/lint-and-compile.yml
+
+  build_ios:
     name: Build iOS
     runs-on: macOS-latest
     steps:
