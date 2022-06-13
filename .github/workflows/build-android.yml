@@ -30,5 +30,7 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: Install node_modules
         run: yarn install && yarn install --cwd ./example/
-      - name: Build App
-        run: cd example/android && ./gradlew assembleDebug --build-cache --stacktrace
+      - name: Build lib
+        run: cd android && ./gradlew assembleDebug --build-cache && cd ..
+      - name: Build example app
+        run: cd example/android && ./gradlew assembleDebug --build-cache && cd ../..
