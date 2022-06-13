@@ -1,9 +1,9 @@
-name: Lint and compile
+name: Code check
 
 on: push
 
 jobs:
-  build:
+  check:
     name: Lint and compile
     runs-on: macOS-latest
     steps:
