@@ -13,10 +13,6 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '11'
-          cache: 'gradle'
-      - uses: nttld/setup-ndk@v1
-        with:
-          ndk-version: r24
       - name: Retrieve Yarn cache directory
         id: yarn-cache-dir
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -30,7 +26,17 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: Install node_modules
         run: yarn install && yarn install --cwd ./example/
-      - name: Build lib
-        run: cd android && ./gradlew assembleDebug --build-cache && cd ..
+      - name: Cache Gradle Wrapper
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+      - name: Cache Gradle Dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-caches-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-caches-
       - name: Build example app
         run: cd example/android && ./gradlew assembleDebug --build-cache && cd ../..
