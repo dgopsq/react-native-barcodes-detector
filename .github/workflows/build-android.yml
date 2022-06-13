@@ -15,7 +15,7 @@ jobs:
           java-version: '11.0.10'
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r23b
+          ndk-version: r20b
       - name: Retrieve Yarn cache directory
         id: yarn-cache-dir
         run: echo "::set-output name=dir::$(yarn cache dir)"
