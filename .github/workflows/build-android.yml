@@ -8,14 +8,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Setup JDK 1.8
+      - name: Setup JDK
         uses: actions/setup-java@v1
         with:
-          java-version: 1.8
+          java-version: '11'
           cache: 'gradle'
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r21e
+          ndk-version: r24
       - name: Retrieve Yarn cache directory
         id: yarn-cache-dir
         run: echo "::set-output name=dir::$(yarn cache dir)"
