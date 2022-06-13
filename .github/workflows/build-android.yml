@@ -38,4 +38,4 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-caches-
       - name: Build example app
-        run: cd example/android && ./gradlew assembleDebug && cd ../..
+        run: cd example/android && ./gradlew assemble --build-cache && cd ../..
