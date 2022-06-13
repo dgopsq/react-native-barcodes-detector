@@ -24,6 +24,11 @@ class BarcodesDetector: NSObject {
             return
         }
 
+        guard let url = NSURL(string: "file://" + sanitizedimageUrl) else {
+            reject("malformed_url", "Malformed image URL", nil);
+            return
+        }
+
         guard let data = NSData(contentsOf: url as URL), let image = UIImage(data: data as Data) else {
             reject("image_load_error", "Couldn't load the image", nil);
             return
