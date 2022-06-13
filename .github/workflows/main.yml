@@ -1,0 +1,14 @@
+name: Main workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  call-code-check:
+    uses: ./.github/workflows/code-check.yml
+
+  call-build-ios:
+    needs: call-code-check
+    uses: ./.github/workflows/build-ios.yml
