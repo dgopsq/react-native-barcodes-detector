@@ -1,4 +1,4 @@
-name: Build iOS
+name: Build Android
 
 on: workflow_call
 
@@ -11,11 +11,12 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v1
         with:
+          distribution: 'zulu'
           java-version: '11'
           cache: 'gradle'
-      - uses: nttld/setup-ndk@v1
-        with:
-          ndk-version: r24
+      # - uses: nttld/setup-ndk@v1
+      #   with:
+      #     ndk-version: r24
       - name: Retrieve Yarn cache directory
         id: yarn-cache-dir
         run: echo "::set-output name=dir::$(yarn cache dir)"
