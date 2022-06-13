@@ -14,9 +14,6 @@ jobs:
           distribution: 'zulu'
           java-version: '11'
           cache: 'gradle'
-      # - uses: nttld/setup-ndk@v1
-      #   with:
-      #     ndk-version: r24
       - name: Retrieve Yarn cache directory
         id: yarn-cache-dir
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -31,4 +28,4 @@ jobs:
       - name: Install node_modules
         run: yarn install --cwd ./example/
       - name: Build App
-        run: yarn example android
+        run: cd example/android && ./gradlew assembleDebug --build-cache && cd ../..
