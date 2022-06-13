@@ -1,10 +1,6 @@
 name: Build iOS
 
-on:
-  push:
-    branches:
-      - main
-      - ios-build-ci
+on: workflow_call
 
 jobs:
   build:
