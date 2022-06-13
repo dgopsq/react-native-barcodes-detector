@@ -28,7 +28,7 @@
     "prepare": "bob build",
     "release": "release-it",
     "example": "yarn --cwd example",
-    "pods": "cd example/ios && bundle exec pod check && bundle exec pod install",
+    "pods": "cd example/ios && bundle exec pod check --ignore-dev-pods && bundle exec pod install",
     "bootstrap": "yarn example && yarn && yarn pods"
   },
   "keywords": [
