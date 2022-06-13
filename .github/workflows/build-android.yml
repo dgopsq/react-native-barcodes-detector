@@ -8,11 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Setup JDK
-        uses: actions/setup-java@v1
-        with:
-          distribution: 'zulu'
-          java-version: '11'
       - name: Retrieve Yarn cache directory
         id: yarn-cache-dir
         run: echo "::set-output name=dir::$(yarn cache dir)"
