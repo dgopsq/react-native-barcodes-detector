@@ -8,7 +8,7 @@ on:
 
 jobs:
   lint_and_compile:
-    uses: ./.github/workflows/lint-and-compile.yml
+    uses: dgopsq/react-native-barcodes-detector/.github/workflows/lint-and-compile.yml
 
   build_ios:
     name: Build iOS
