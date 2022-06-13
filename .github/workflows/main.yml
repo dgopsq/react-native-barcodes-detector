@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - ios-build-ci
 
 jobs:
   call-code-check:
