@@ -25,6 +25,10 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: Install node_modules
         run: yarn install --frozen-lockfile --cwd ./example/
+      - name: Lint
+        run: yarn lint
+      - name: Compile TypeScript
+        run: yarn typescript
       - name: Restore build cache
         uses: mikehardy/buildcache-action@v1
         continue-on-error: true
