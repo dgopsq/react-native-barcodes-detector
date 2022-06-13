@@ -10,9 +10,6 @@ jobs:
   build:
     name: Build iOS
     runs-on: macOS-latest
-    defaults:
-      run:
-        working-directory: example/ios
     steps:
       - uses: actions/checkout@v2
       - name: Retrieve Yarn cache directory
@@ -27,7 +24,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Install node_modules
-        run: yarn install --frozen-lockfile --cwd ..
+        run: yarn install --frozen-lockfile --cwd ./example/
       - name: Restore build cache
         uses: mikehardy/buildcache-action@v1
         continue-on-error: true
@@ -48,6 +45,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pods-
       - name: Install Pods
-        run: bundle exec pod check || bundle exec pod install
+        run: yarn pods --cwd ./example/ios
       - name: Build App
-        run: yarn ios
+        run: yarn example ios
