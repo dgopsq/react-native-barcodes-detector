@@ -5,7 +5,7 @@ on: workflow_call
 jobs:
   build:
     name: Build Android
-    runs-on: ubuntu-latest
+    runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v2
       - name: Setup JDK
