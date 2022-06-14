@@ -13,9 +13,8 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '11.0.10'
-      - uses: nttld/setup-ndk@v1
-        with:
-          ndk-version: r20b
+      - name: Setup NDK
+        run: ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --install "ndk;20.1.5948944"
       - name: Retrieve Yarn cache directory
         id: yarn-cache-dir
         run: echo "::set-output name=dir::$(yarn cache dir)"
